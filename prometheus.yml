@@ -1,0 +1,17 @@
+global:
+  scrape_interval:     5s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+      monitor: 'docker-hardware-monitor'
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+    - targets: ['prometheus:9090']
+
+  - job_name: 'monitor'
+    static_configs:
+    - targets: ['monitor-app:8000']
